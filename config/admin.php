@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use Encore\Admin\Grid\Displayers\DropdownActions;
 
 return [
@@ -126,7 +127,7 @@ return [
         'providers' => [
             'admin' => [
                 'driver' => 'eloquent',
-                'model' => Encore\Admin\Auth\Database\Administrator::class,
+                'model' => Admin::class,
             ],
         ],
 

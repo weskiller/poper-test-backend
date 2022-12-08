@@ -38,12 +38,17 @@ return [
     'guards' => [
         'teacher' => [
             'driver' => 'passport',
-            'provider' => 'teachers',
+            'provider' => 'teacher',
         ],
 
         'student' => [
             'driver' => 'passport',
-            'provider' => 'students',
+            'provider' => 'student',
+        ],
+
+        'administrator' => [
+            'driver' => 'passport',
+            'provider' => 'administrator',
         ]
     ],
 
@@ -65,14 +70,19 @@ return [
     */
 
     'providers' => [
-        'teachers' => [
+        'teacher' => [
             'driver' => 'eloquent',
             'model' => App\Models\Teacher::class,
         ],
 
-        'students' => [
+        'student' => [
             'driver' => 'eloquent',
             'model' => App\Models\Student::class,
+        ],
+
+        'administrator' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ]
     ],
 

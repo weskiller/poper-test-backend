@@ -16,8 +16,8 @@ return new class extends Migration {
             $table->id();
             $table->morphs('send');
             $table->morphs('receive');
-            $table->string('title')->comment('title');
-            $table->string('content')->comment('content');
+            $table->string('title')->nullable()->comment('title');
+            $table->string('content')->nullable()->comment('content');
             $table->timestamps();
         });
     }

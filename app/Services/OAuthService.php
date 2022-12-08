@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\OAuth\Client;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\UnauthorizedException;
 use Laravel\Passport\RefreshTokenRepository;
 
 class OAuthService
@@ -15,15 +16,16 @@ class OAuthService
     {
     }
 
-    public function authorize(string $email, string $password): Response
+    public function authorize(string $username, string $password): Response
     {
         $data = [
             'grant_type' => 'password',
             'client_id' => $this->client->id,
             'client_secret' => $this->client->secret,
-            'username' => $email,
+            'username' => $username,
             'password' => $password,
         ];
+
         return Http::asForm()->post($this->url, $data);
     }
 
@@ -41,5 +43,13 @@ class OAuthService
     public function revoke(string $refreshToken): void
     {
         app(RefreshTokenRepository::class)->revokeRefreshTokensByAccessTokenId($refreshToken);
+    }
+
+    public static function fromIdentity(string $identity): static
+    {
+        /** @var Client $client */
+        $client = Client::whereProvider($identity)
+            ->firstOr(fn() => throw new UnauthorizedException('authentication service is unavailable'));
+        return new static($client);
     }
 }

@@ -24,6 +24,8 @@ Route::any('refresh_token', [AuthController::class, 'refresh'])->name('refresh')
 
 Route::any('revoke_token', [AuthController::class, 'revoke'])->name('revoke');
 
+Route::any('validate_token', [AuthController::class, 'validate'])->name('validate');
+
 Route::any('teacher/register', [TeacherController::class, 'register'])->name('teacher.register');
 
 Route::group(['middleware' => 'auth:teacher'], static function () {
@@ -34,8 +36,8 @@ Route::group(['middleware' => 'auth:teacher'], static function () {
     Route::post('invite/accept', [InviteController::class, 'accept'])->name('invite.accept');
 
 
-    Route::get('student', [StudentController::class, 'index'])->name('student.index');
-    Route::post('student', [StudentController::class, 'store'])->name('student.store');
+    Route::get('/school/student', [StudentController::class, 'index'])->name('student.index');
+    Route::post('/school/student', [StudentController::class, 'store'])->name('student.store');
 
     Route::get('followers', [TeacherController::class, 'followers'])->name('teacher.followers');
 

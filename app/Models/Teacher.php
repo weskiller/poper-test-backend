@@ -50,9 +50,8 @@ class Teacher extends Authenticatable
 
     public function messages(): MorphMany
     {
-        return $this->morphMany(Message::class, 'receive');
+        return $this->morphMany(Message::class, 'send');
     }
-
 
     public function followers(): BelongsToMany
     {

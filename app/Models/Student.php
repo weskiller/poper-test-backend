@@ -32,6 +32,6 @@ class Student extends Authenticatable
 
     public function messages(): MorphMany
     {
-        return $this->morphMany(Message::class, 'receive');
+        return $this->morphMany(Message::class, 'send');
     }
 }

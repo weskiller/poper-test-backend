@@ -123,6 +123,12 @@ return [
             'path' => storage_path('logs/sql.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
+
+        'websocket' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/websocket.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
     ],
 
 ];
